@@ -76,12 +76,14 @@ function initMap() {
   var infowindow4 = new google.maps.InfoWindow({
     content: "<b>Green Triangle Needs Insulin!</b></br><img src='sos4.png'/>"
   });
-  marker3.addListener('click', function() {
+  marker4.addListener('click', function() {
     infowindow4.open(map, marker4);
   });
 
   var marker5 = new google.maps.Marker({
     position: station,
+    labelContent: "Nationwide Mobile Network Station",
+    icon: "nationwide_icon.png",
     map: map
   });
 
