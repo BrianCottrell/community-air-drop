@@ -33,7 +33,7 @@ function initMap() {
   });
   marker1.setVisible(false);
   var infowindow1 = new google.maps.InfoWindow({
-    content: "<b>Purple Circle Needs Power!</b><img src='amazon_sos.jpg'/>"
+    content: "<b>Purple Circle Needs Power!</b></br><img src='sos1.png'/>"
   });
   marker1.addListener('click', function() {
     infowindow1.open(map, marker1);
@@ -45,7 +45,7 @@ function initMap() {
     map: map
   });
   var infowindow2 = new google.maps.InfoWindow({
-    content: "<img src='amazon_sos.jpg'/>"
+    content: "<b>Red Square Needs Water!</b></br><img src='sos2.png'/>"
   });
   marker2.addListener('click', function() {
     infowindow2.open(map, marker2);
@@ -57,7 +57,7 @@ function initMap() {
     map: map
   });
   var infowindow3 = new google.maps.InfoWindow({
-    content: "<img src='amazon_sos.jpg'/>"
+    content: "<b>Blue Square Needs Madical Attention!</b></br><img src='sos3.png'/>"
   });
   marker3.addListener('click', function() {
     infowindow3.open(map, marker3);
