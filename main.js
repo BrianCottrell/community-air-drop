@@ -1,12 +1,16 @@
 function initMap() {
   var uluru = {lat: 37.383754, lng: -122.012696};
   var drone = {lat: 37.386754, lng: -122.022696};
+  var station = {lat: 37.396754, lng: -122.012696};
   var purple = {lat: 37.387754, lng: -122.013096};
   var red = {lat: 37.380754, lng: -122.011596};
   var blue = {lat: 37.381754, lng: -122.012896};
+  var green = {lat: 37.383754, lng: -122.012696};
   var circle;
   var rMin = 5, rMax = 300, step = 8;
   var direction = 1;
+  var unsure = true;
+  var count = 0;
 
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 16,
@@ -63,6 +67,24 @@ function initMap() {
     infowindow3.open(map, marker3);
   });
 
+  var marker4 = new google.maps.Marker({
+    position: green,
+    icon: "green_icon.png",
+    map: map
+  });
+  marker4.setVisible(false);
+  var infowindow4 = new google.maps.InfoWindow({
+    content: "<b>Green Triangle Needs Insulin!</b></br><img src='sos4.png'/>"
+  });
+  marker3.addListener('click', function() {
+    infowindow4.open(map, marker4);
+  });
+
+  var marker5 = new google.maps.Marker({
+    position: station,
+    map: map
+  });
+
   circle = new google.maps.Circle({
     center: drone,
     radius: rMax,
@@ -73,6 +95,17 @@ function initMap() {
     fillOpacity: 0.5
   });
   circle.setMap(map);
+
+  circle1 = new google.maps.Circle({
+    center: station,
+    radius: rMax*2,
+    strokeColor: "#449944",
+    strokeOpacity: 0.5,
+    strokeWeight: 2,
+    fillColor: "#99FF99",
+    fillOpacity: 0.5
+  });
+  circle1.setMap(map);
 
   setAnimation();
 
@@ -88,6 +121,7 @@ function initMap() {
     intID = setInterval(function() {
         var radius = circle.getRadius();
         if ((radius > rMax) || (radius < rMin)) {
+        	document.getElementById('ping').play();
             radius = rMin
         }
         circle.setRadius(radius + step);
@@ -103,7 +137,15 @@ function initMap() {
 	    	g = p.lat()-0.0004;
 	    } else if (m > -122.016096) {
 	    	marker1.setVisible(true);
+	    	if (unsure) {
+	    		document.getElementById('unsure').play();
+	    		unsure = false;
+	    	}
 	    }
+	    if (count == 200) {
+	    	marker4.setVisible(true);
+	    }
+	    count++;
 	    circle.setCenter(new google.maps.LatLng(g,m));
 	    marker.setPosition(new google.maps.LatLng(g-0.0005,m));
     }, 100);        
